@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+
+<script>
+	var capacidadeTanque = 40
+	var caminhoGasolina = 480
+	var caminhoAlcool = 300
+
+	function calculaConsumo(capacidade, distancia, tipoCombustivel) {
+		var consumo = distancia/capacidade
+
+		document.write("O consumo de " + tipoCombustivel + " é de " + consumo.toFixed(3) + " km/L <br>")
+	}
+
+	calculaConsumo(capacidadeTanque, caminhoGasolina, "Gasolina")
+	calculaConsumo(capacidadeTanque, caminhoAlcool, "Alcóol")
+
+</script>

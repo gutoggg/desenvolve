@@ -1,0 +1,68 @@
+<meta charset = "UTF-8">
+
+<input type="" name="">
+<button>Compare</button>
+
+<script>
+
+	function sorteia(){
+		return Math.round(Math.random() * 10);
+	}
+
+	function sorteiaNumeros(quantidadeNumeros){
+		var numerosSorteados = [];
+		var contador = 1;
+
+		while(contador <= quantidadeNumeros) {
+			
+			var novoNumero = sorteia();
+
+			if (novoNumero != 0) {
+				var temIgual = false;
+
+				for(var i = 0; i < numerosSorteados.length; i++){
+					if (novoNumero == numerosSorteados[i]) {
+						temIgual = true;
+						break;
+					} 
+				}
+
+				if (temIgual == false) {
+					numerosSorteados.push(novoNumero)
+					contador++;
+				}
+			}
+		}
+		return numerosSorteados;
+	}
+
+	var segredos = sorteiaNumeros(3);
+	console.log(segredos)
+	var input = document.querySelector("input");
+	var button = document.querySelector("button")
+
+	input.focus();
+
+	function verifica () {
+
+		for (var i = 0; i < segredos.length ; i++ ) {
+			if (input.value == segredos[i]){
+				alert("Segredo correto!");
+				input.value = "";
+				input.focus();
+				return;
+			}
+
+		}
+
+		input.value = "";
+		input.focus();
+		alert("Segredo errado!");
+	}
+			
+		
+
+
+	button.onclick = verifica;
+
+</script>
