@@ -5,19 +5,36 @@
     var tela = document.querySelector("canvas");
     var pincel = tela.getContext("2d");
 
-    function desenhaQuadrado(coordenadaX, coordenadaY, tamanho, cor){
-
+    function desenhaTexto(texto, coordenadaX, coordenadaY){
         pincel.font='20px Georgia';
         pincel.fillStyle='black';
-        pincel.fillText("Qual é a fração?", 50, 30);
-
-        pincel.fillStyle = cor;
-        pincel.fillStroke = "black";
-        pincel.fillRect(coordenadaX, coordenadaY, tamanho, tamanho);
-        pincel.strokeRect(coordenadaX, coordenadaY, tamanho, tamanho);
-
+        pincel.fillText(texto, coordenadaX, coordenadaY);
     }
 
-    desenhaQuadrado(50,50,60,"red")
+    function desenhaQuadrado(coordenadaX, coordenadaY, tamanho, cor){
+        pincel.fillStyle = cor;
+        pincel.fillRect(coordenadaX, coordenadaY, tamanho, tamanho);   
+    }
+
+    function desenhaBorda(coordenadaX, coordenadaY, tamanho){
+        pincel.fillStroke = "black";
+        pincel.strokeRect(coordenadaX, coordenadaY, tamanho, tamanho);
+    }
+    
+    function desenhaFracao(numerador, denominador){
+        desenhaTexto("Qual é a fração?", 50, 40);
+        for (var i = 1; i <= denominador; i++) {
+           
+            if (i <= numerador) {
+                desenhaQuadrado(50 * i, 50, 50, "green");
+                desenhaBorda(50 * i, 50, 50,);
+            } else {
+                desenhaBorda(50 * i, 50, 50,) ;
+            }
+        }
+    }
+
+    desenhaFracao(3,4);
+    
     
 </script>
