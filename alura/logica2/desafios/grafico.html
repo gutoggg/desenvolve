@@ -1,0 +1,38 @@
+<canvas width="600" height="600"></canvas>
+
+<script>
+    var tela = document.querySelector("canvas");
+    var pincel = tela.getContext("2d");
+
+    var serie2015 = [50,25,20,5];
+    var serie2016 = [65,20,13,2];   
+    var cores = ["blue", "green", "yellow", "red"];
+
+    function desenhaTexto(texto, coordenadaX, coordenadaY){
+        pincel.font='20px Georgia';
+        pincel.fillStyle='black';
+        pincel.fillText(texto, coordenadaX, coordenadaY);
+    }
+
+    function desenhaBarra(x, y, serie, cores, texto){
+        var acumuloDistancia = 0;
+        for (var i = 0; i <= serie.length; i++){
+
+            var porcentagem = serie[i] * 2;
+            var cor = cores[i];
+
+            pincel.fillStyle = cor;
+            pincel.fillRect(x, y  + acumuloDistancia, 60, porcentagem);
+            pincel.strokeRect(x, y  + acumuloDistancia, 60, porcentagem);
+            acumuloDistancia += (porcentagem);
+            desenhaTexto(texto, x, y - 25 );
+
+        }
+
+        return acumuloDistancia;
+    }
+
+    desenhaBarra(50,50,serie2015, cores, "Série 2015");
+    desenhaBarra(300,50,serie2016, cores, "Série 2016");
+
+</script>
