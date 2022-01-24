@@ -9,6 +9,23 @@
 		return Math.round(Math.random() * 10);
 	}
 
+	function verifica () {
+
+		for (var i = 0; i < segredos.length ; i++ ) {
+			if (input.value == segredos[i]){
+				alert("Segredo correto!");
+				input.value = "";
+				input.focus();
+				return;
+			}
+
+		}
+
+		input.value = "";
+		input.focus();
+		alert("Segredo errado!");
+	}
+
 	function sorteiaNumeros(quantidadeNumeros){
 		var numerosSorteados = [];
 		var contador = 1;
@@ -42,27 +59,7 @@
 	var button = document.querySelector("button")
 
 	input.focus();
-
-	function verifica () {
-
-		for (var i = 0; i < segredos.length ; i++ ) {
-			if (input.value == segredos[i]){
-				alert("Segredo correto!");
-				input.value = "";
-				input.focus();
-				return;
-			}
-
-		}
-
-		input.value = "";
-		input.focus();
-		alert("Segredo errado!");
-	}
 			
-		
-
-
 	button.onclick = verifica;
 
 </script>
