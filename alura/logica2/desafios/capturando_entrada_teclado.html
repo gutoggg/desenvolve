@@ -1,75 +1,112 @@
-
 <canvas width="600" height="400"></canvas>
 
 <script>
+
 /*
+
 Este arquivo foi construído para exercitar os conceitos aprendidos sobre reposicionamento de objetos em 
 um canvas e aprender a ler eventos de teclado tais como "onkeydown" e "onkeyup". 
 
 Como funciona:
     Ao carregar a página, um circulo azul é desenhado na posição x = 20 e y = 20. Após isso, você pode
     movimenta-lo utilizando as teclas direcionais do teu teclado. 
+
 */
+
     var tela = document.querySelector('canvas');
     var pincel = tela.getContext('2d');
-    var aceleracao = 5;
+    var velocidade = 10;
 
     var posicao = {
         x: 20,
         y: 20
     };
 
+    var movimento = {
+        x: 0,
+        y: 0
+    }
+
     var direcoes = {
         37: { //esquerda
             x: -1, 
             y: 0,
+            state: false
         },
         38: { //cima
             x: 0, 
             y: -1,
+            state: false
         },
         39: { //direita
             x: 1,
             y: 0,
+            state: false
         },
         40: { //baixo
             x: 0,
             y: 1,
+            state: false
         }
     };
 
-
     function desenhaCirculo(x, y, raio) {
+        
         pincel.fillStyle = 'blue';
         pincel.beginPath();
         pincel.arc(x, y, raio, 0, 2 * Math.PI);
         pincel.fill();
     }
 
+    function desenhaTexto(texto, coordenadaX, coordenadaY){
+        pincel.font='20px Georgia';
+        pincel.fillStyle='black';
+        pincel.fillText(texto, coordenadaX, coordenadaY);
+    }
     function limpaTela() {
         pincel.clearRect(0, 0, 600, 400);
     }
 
-    function atualizaTela() {
+    function onInterval() {
+ 
+        posicao.x += movimento.x * velocidade/10;
+        posicao.y += movimento.y * velocidade/10;
         limpaTela();
         desenhaCirculo(posicao.x,posicao.y, 10);
-    }
+        desenhaTexto("Velocidade: " + velocidade, 300,20);
 
+    }
+    
     function leTeclado(evento){
+        
+        if (direcoes[evento.keyCode]) {
+            
+            if (direcoes[evento.keyCode].state == false && evento.type == "keydown"){
+                direcoes[evento.keyCode].state = true;
+                movimento.x += direcoes[evento.keyCode].x;
+                movimento.y += direcoes[evento.keyCode].y;
 
-        if (evento.type == "keydown") {
-            posicao.x += direcoes[evento.keyCode].x * aceleracao
-            posicao.y += direcoes[evento.keyCode].y * aceleracao
-        } else if (evento.type == "keyup"){
-            posicao.x -= direcoes[evento.keyCode].x * aceleracao
-            posicao.y -= direcoes[evento.keyCode].y * aceleracao
-        }
+            } else if (direcoes[evento.keyCode].state == true && evento.type == "keyup") {
+                direcoes[evento.keyCode].state = false;
+                movimento.x -= direcoes[evento.keyCode].x;
+                movimento.y -= direcoes[evento.keyCode].y;
+            }
+
+        } 
+
+        if (evento.keyCode == 107 && evento.type == "keydown"){
+            velocidade++
+        } 
+
+        if (evento.keyCode == 109 && evento.type == "keydown"){
+            if (velocidade > 0){
+                velocidade--
+            }
+            
+        } 
     }
 
-    pincel.fillStyle = 'lightgray';
-    pincel.fillRect(0, 0, 600, 400);
-
-    setInterval(atualizaTela, 5);
+    setInterval(onInterval, 5);
 
     document.onkeydown = leTeclado;
     document.onkeyup = leTeclado;
