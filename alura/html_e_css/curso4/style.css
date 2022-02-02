@@ -53,6 +53,7 @@ nav a:hover {
     box-sizing: border-box;
     border: 2px solid #000000;
     border-radius: 10px;
+    transition: 600ms;
 }
 
 .produtos li:hover {
@@ -95,11 +96,6 @@ footer {
     color: #ffffff;
     font-size: 13px;
     margin-top: 20px ;
-}
-
-main {
-    width: 940px;
-    margin: 0 auto;    
 }
 
 form {
@@ -167,6 +163,18 @@ width:100%;
     font-size: 2em;
     margin: 0 0 1em;
     clear: left;
+    font-weight: normal;
+}
+
+.titulo-principal:first-letter {
+    font-weight: bold;
+}
+
+.principal {
+    padding: 3em 0;
+    background: #fefefe;
+    width: 940px;
+    margin: 0 auto;  
 }
 
 .principal p {
@@ -200,18 +208,41 @@ width:100%;
 
 .imagem-beneficios {
     width: 60%;
+    opacity: 1;
+    transition: 400ms;
+    box-shadow: 15px 15px 20px 0 #000000;
+}
+
+.imagem-beneficios:hover {
+    opacity: 0.9;
+   
 }
 
 .beneficios {
     padding : 3em 0;
+    background: #888888;
 }
 
 .itens {
     line-height: 1.5;
 }
 
+.itens:first-child {
+    font-weight: bold;
+}
+
+.itens:before {
+    content: "✶ ";
+}
+
 .mapa {
     padding : 3em 0;
+    background: linear-gradient(#fefefe 10%, #888888);
+}
+
+.mapa-conteudo {
+    width: 940px;
+    margin: 0 auto;  
 }
 
 .mapa p {
@@ -222,4 +253,23 @@ width:100%;
 .video {
     width: 560px;
     margin:2em auto;
+}
+
+@media screen and (max-width: 480px) {
+    .caixa, .principal, .conteudo-beneficios, .mapa-conteudo, .video {
+        width: auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    nav {
+        position: static;
+        text-align: center;
+    }
+
+    .lista-beneficios, .imagem-beneficios {
+        width: 100%;
+    }
 }
