@@ -202,6 +202,14 @@ width:100%;
     width: 60%;
 }
 
+.beneficios {
+    padding : 3em 0;
+}
+
+.itens {
+    line-height: 1.5;
+}
+
 .mapa {
     padding : 3em 0;
 }
